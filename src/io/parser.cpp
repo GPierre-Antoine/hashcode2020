@@ -15,12 +15,7 @@ problem_instance parser::parse(std::istream & istream)
 
     problem_instance instance(book_count, libraries_count, duration);
 
-    while (book_count--)
-    {
-        score_t score;
-        istream >> score;
-        instance.books.add(score);
-    }
+    parse_books(istream, book_count, instance);
 
     for (library_id_t library_id = 0; library_id < libraries_count; ++library_id)
     {
@@ -40,4 +35,13 @@ problem_instance parser::parse(std::istream & istream)
     }
 
     return instance;
+}
+void parser::parse_books(std::istream & istream, unsigned int book_count, problem_instance & instance)
+{
+    while (book_count--)
+    {
+        score_t score;
+        istream >> score;
+        instance.books.add(score);
+    }
 }

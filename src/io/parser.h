@@ -12,6 +12,7 @@
 class parser
 {
 public:
-    static problem_instance parse(std::istream& istream);
+    static problem_instance parse(std::istream & istream);
+    static void parse_books(std::istream & istream, unsigned int book_count, problem_instance & instance);
 };
 

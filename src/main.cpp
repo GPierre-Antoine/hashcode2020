@@ -13,10 +13,20 @@ using std::runtime_error;
 using std::cin;
 using std::endl;
 
-int main()
+int main(int argc, char ** argv)
 {
+    std::vector<std::string> arguments(argv+1, argv+argc);
 
-    auto && problem = parser::parse(cin);
+    std::istream* ref = &cin;
+
+    try
+    {
+        auto problem = parser::parse(*ref);
+    }
+    catch (std::exception &e)
+    {
+        cerr << e.what() << endl;
+    }
 
     return 0;
 }

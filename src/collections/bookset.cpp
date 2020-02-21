@@ -3,6 +3,7 @@
 //
 
 #include "bookset.h"
+#include "../entities/book.h"
 
 
 bookset::bookset(unsigned int expect)
@@ -22,5 +23,25 @@ book & bookset::operator[](unsigned int index)
 std::size_t bookset::size() const
 {
     return catalog.size();
+}
+
+bookset::const_iterator bookset::cbegin() const noexcept
+{
+    return catalog.cbegin();
+}
+
+bookset::const_iterator bookset::cend() const noexcept
+{
+    return catalog.cend();
+}
+
+bookset::iterator bookset::begin() noexcept
+{
+    return catalog.begin();
+}
+
+bookset::iterator bookset::end() noexcept
+{
+    return catalog.end();
 }
 

@@ -10,6 +10,8 @@
 #include <numeric>
 #include <iterator>
 #include <cmath>
+#include <vector>
+#include <functional>
 
 
 struct basic_info
@@ -20,19 +22,30 @@ struct basic_info
     double stddev;
 };
 
-template <typename iterator, typename lambda>
+template <typename iterator, typename closure>
 struct basic_info_calculator
 {
-    basic_info operator()(iterator begin, iterator end, lambda &&);
+    basic_info operator()(iterator begin, iterator end, closure lambda);
 };
 
-template <typename iterator, typename callable>
-basic_info
-basic_info_calculator<iterator, callable>::operator()(const iterator begin, const iterator end, callable && lambda)
+template <typename iterator, typename closure>
+basic_info basic_info_calculator<iterator, closure>::operator()(iterator begin, iterator end, closure lambda)
 {
     basic_info info{};
+
     info.size = std::distance(begin, end);
-    info.sum = std::accumulate(begin, end, 0, lambda);
+    info.sum = std::accumulate(
+            begin, end, 0, [lambda](std::size_t total, const auto & value)
+            {
+                std::size_t increment = lambda(value);
+                if (std::numeric_limits<std::size_t>::max() - increment < total)
+                {
+                    throw std::runtime_error("sum overflow");
+                }
+                return total + increment;
+
+            }
+    );
     info.mean = double(info.sum) / info.size;
 
     double accum = 0.0;

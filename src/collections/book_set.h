@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "book.h"
+#include "../entities/book.h"
 
 
 class book_set

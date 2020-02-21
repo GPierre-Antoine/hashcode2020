@@ -34,6 +34,14 @@ problem_instance parser::parse(std::istream & istream)
         library.compute_stats();
     }
 
+    istream >> std::ws;
+
+    auto next = istream.peek();
+    if (next != EOF)
+    {
+        throw std::runtime_error("bad parsing");
+    }
+
     return instance;
 }
 void parser::parse_books(std::istream & istream, unsigned int book_count, problem_instance & instance)

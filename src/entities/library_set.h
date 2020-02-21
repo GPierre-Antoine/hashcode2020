@@ -16,7 +16,9 @@ private:
     std::vector<library> catalog;
 public:
     explicit library_set(unsigned long expect);
-    void add(unsigned int book_count, unsigned int registration_duration, unsigned int books_per_day);
+    void add(
+            library_id_t id, book_count_t book_count, duration_t registration_duration, books_per_day_t books_per_day
+    );
     library & operator[](unsigned int index);
 
 };

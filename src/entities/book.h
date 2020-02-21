@@ -9,12 +9,12 @@
 #include <cstddef>
 
 
-typedef unsigned short book_id;
+typedef unsigned short book_id_t;
 typedef unsigned short score_t;
 
 struct book
 {
-    const book_id id;
+    const book_id_t id;
     const score_t score;
     unsigned int references;
     unsigned int read_on_day;

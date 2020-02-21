@@ -13,9 +13,9 @@
 
 struct problem_instance
 {
-    problem_instance(unsigned long book_count, unsigned long libraries_count, unsigned long duration);
+    problem_instance(unsigned long book_count, library_id_t libraries_count, duration_t duration);
     book_set books;
     library_set libraries;
-    unsigned int duration;
+    duration_t duration;
 };
 

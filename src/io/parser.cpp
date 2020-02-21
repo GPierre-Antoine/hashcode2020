@@ -9,8 +9,8 @@
 problem_instance parser::parse(std::istream & istream)
 {
     unsigned int book_count;
-    unsigned int libraries_count;
-    unsigned int duration;
+    library_id_t libraries_count;
+    duration_t duration;
     istream >> book_count >> libraries_count >> duration;
 
     problem_instance instance(book_count, libraries_count, duration);
@@ -22,24 +22,21 @@ problem_instance parser::parse(std::istream & istream)
         instance.books.add(score);
     }
 
-    while (libraries_count)
+    for (library_id_t library_id = 0; library_id < libraries_count; ++library_id)
     {
         unsigned int library_book_count;
-        unsigned int registration_date;
-        unsigned int books_per_day;
-        istream >> library_book_count >> registration_date >> books_per_day;
-        instance.libraries.add(library_book_count, registration_date, books_per_day);
-        auto & library = instance.libraries[libraries_count];
-        while (library_book_count)
+        duration_t registration_duration;
+        books_per_day_t books_per_day;
+        istream >> library_book_count >> registration_duration >> books_per_day;
+        instance.libraries.add(library_id, library_book_count, registration_duration, books_per_day);
+        auto & library = instance.libraries[library_id];
+        for (unsigned int item; item < library_book_count; ++item)
         {
-            unsigned int book_id;
+            book_id_t book_id;
             istream >> book_id;
-            auto book = &instance.books[book_id];
-            library.add(book);
-            library_book_count -= 1;
+            library.add(&instance.books[book_id]);
         }
         library.compute_stats();
-        libraries_count -= 1;
     }
 
     return instance;

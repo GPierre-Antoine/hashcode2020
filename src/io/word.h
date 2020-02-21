@@ -11,7 +11,7 @@
 
 enum token_type
 {
-    eof = 0, number = 1, newline = 2, space = 3
+    number = 1, newline = 2, space = 3
 };
 
 typedef std::pair<token_type, std::size_t> token;

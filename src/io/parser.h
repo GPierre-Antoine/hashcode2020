@@ -7,13 +7,12 @@
 
 
 #include "lexer.h"
+#include "../problem/problem_instance.h"
 
 
 class parser
 {
-    lexer scanner;
 public:
-
-    explicit parser(lexer && scanner);
+    static problem_instance parse(std::istream& istream);
 };
 

@@ -10,4 +10,11 @@ add_executable(hashcode
         src/entities/book.cpp src/entities/book.h
         src/problem/problem_instance.cpp
         src/problem/problem_instance.h
-        src/io/parser.cpp src/io/parser.h src/io/lexer.cpp src/io/lexer.h src/io/word.h)
+        src/io/parser.cpp src/io/parser.h
+        src/io/lexer.cpp src/io/lexer.h
+        src/io/word.h
+        src/entities/book_set.cpp
+        src/entities/book_set.h
+        src/entities/library_set.cpp
+        src/entities/library_set.h
+        src/entities/book.cpp src/entities/book.h src/entities/library.cpp src/entities/library.h)

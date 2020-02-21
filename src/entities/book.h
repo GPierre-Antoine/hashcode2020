@@ -7,15 +7,13 @@
 
 
 #include <cstddef>
+#include "def.h"
 
-
-typedef unsigned short book_id_t;
-typedef unsigned short score_t;
 
 struct book
 {
-    const book_id_t id;
-    const score_t score;
+    const book_id_t id{};
+    const score_t score{};
     unsigned references{};
     unsigned read_on_day{};
 };

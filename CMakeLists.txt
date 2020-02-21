@@ -16,4 +16,6 @@ add_executable(hashcode
         src/entities/library_set.cpp
         src/entities/library_set.h
         src/entities/book.cpp src/entities/book.h
-        src/entities/library.cpp src/entities/library.h)
+        src/entities/library.cpp src/entities/library.h
+        src/problem/heuristic.h
+        src/entities/def.h)

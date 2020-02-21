@@ -8,9 +8,16 @@
 
 problem_instance parser::parse(std::istream & istream)
 {
-    const auto book_count = istream.get();
+    auto book_count = istream.get();
     const auto libraries = istream.get();
     const auto duration = istream.get();
 
-    return problem_instance(book_count, libraries, duration);
+    problem_instance instance(book_count, libraries, duration);
+
+    while (book_count--)
+    {
+        instance.books.add(istream.get());
+    }
+
+    return instance;
 }

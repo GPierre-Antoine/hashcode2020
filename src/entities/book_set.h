@@ -17,5 +17,6 @@ public:
     explicit book_set(unsigned int expect);
     void add(score_t book_score);
     book & operator[](unsigned int index);
+    std::size_t size() const;
 };
 

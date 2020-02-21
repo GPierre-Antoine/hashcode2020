@@ -16,7 +16,7 @@ struct book
 {
     const book_id_t id;
     const score_t score;
-    unsigned int references;
-    unsigned int read_on_day;
+    unsigned references{};
+    unsigned read_on_day{};
 };
 

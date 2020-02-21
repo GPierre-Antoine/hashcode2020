@@ -13,17 +13,18 @@ using std::runtime_error;
 using std::cin;
 using std::endl;
 
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
-    std::vector<std::string> arguments(argv+1, argv+argc);
+    std::vector<std::string> arguments(argv + 1, argv + argc);
 
-    std::istream* ref = &cin;
+    std::istream *ref = &cin;
 
     try
     {
         auto problem = parser::parse(*ref);
+        std::cout << "there are " << problem.books.size() << " books\n";
     }
-    catch (std::exception &e)
+    catch (std::exception & e)
     {
         cerr << e.what() << endl;
     }

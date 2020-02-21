@@ -11,11 +11,11 @@ add_executable(hashcode
         src/problem/problem_instance.cpp
         src/problem/problem_instance.h
         src/io/parser.cpp src/io/parser.h
-        src/collections/book_set.cpp
-        src/collections/book_set.h
+        src/collections/bookset.cpp
+        src/collections/bookset.h
         src/collections/library_set.cpp
         src/collections/library_set.h
         src/entities/book.cpp src/entities/book.h
         src/entities/library.cpp src/entities/library.h
         src/problem/heuristic.h
-        src/entities/def.h)
+        src/entities/def.h src/statistics/bookset_statistics.cpp src/statistics/bookset_statistics.h src/statistics/basic_info.h)

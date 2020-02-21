@@ -10,11 +10,11 @@
 #include "../entities/book.h"
 
 
-class book_set
+class bookset
 {
     std::vector<book> catalog;
 public:
-    explicit book_set(unsigned int expect);
+    explicit bookset(unsigned int expect);
     void add(score_t book_score);
     book & operator[](unsigned int index);
     std::size_t size() const;

@@ -9,11 +9,14 @@
 #include <cstddef>
 
 
+typedef unsigned short book_id;
+typedef unsigned short score_t;
+
 struct book
 {
-    const std::size_t id;
-    const std::size_t score;
-    std::size_t references;
-    std::size_t read_on_day;
+    const book_id id;
+    const score_t score;
+    unsigned int references;
+    unsigned int read_on_day;
 };
 

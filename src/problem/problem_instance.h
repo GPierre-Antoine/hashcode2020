@@ -16,6 +16,6 @@ struct problem_instance
     problem_instance(unsigned long book_count, unsigned long libraries_count, unsigned long duration);
     book_set books;
     library_set libraries;
-    std::size_t duration;
+    unsigned int duration;
 };
 

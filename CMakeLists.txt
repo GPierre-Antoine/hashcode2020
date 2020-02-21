@@ -3,7 +3,7 @@ project(hashcode)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "-W -Wall -Wextra --pedantic -Werror -fconcepts")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-comment -Wno-unused-function")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-comment -Wno-unused-function -Wno-unused-variable")
 
 add_executable(hashcode
         src/main.cpp
@@ -16,4 +16,5 @@ add_executable(hashcode
         src/entities/book_set.h
         src/entities/library_set.cpp
         src/entities/library_set.h
-        src/entities/book.cpp src/entities/book.h src/entities/library.cpp src/entities/library.h)
+        src/entities/book.cpp src/entities/book.h
+        src/entities/library.cpp src/entities/library.h)

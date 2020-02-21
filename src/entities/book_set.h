@@ -14,7 +14,8 @@ class book_set
 {
     std::vector<book> catalog;
 public:
-    explicit book_set(unsigned long expect);
-    void add(std::size_t book_score);
+    explicit book_set(unsigned int expect);
+    void add(score_t book_score);
+    book & operator[](unsigned int index);
 };
 

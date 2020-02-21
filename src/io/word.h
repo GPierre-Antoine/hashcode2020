@@ -14,4 +14,4 @@ enum token_type
     number = 1, newline = 2, space = 3
 };
 
-typedef std::pair<token_type, std::size_t> token;
+typedef std::pair<token_type, unsigned int> token;

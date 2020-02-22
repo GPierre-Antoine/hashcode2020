@@ -28,7 +28,7 @@ problem_instance parser::parse(std::istream & istream)
 
     parse_books(istream, book_count, instance);
 
-    for (library_id_t library_id = 0; library_id < libraries_count; ++library_id)
+    for (library_id_t library_id{}; library_id < libraries_count; ++library_id)
     {
         unsigned int library_book_count;
         duration_t registration_duration;
@@ -36,7 +36,7 @@ problem_instance parser::parse(std::istream & istream)
         istream >> library_book_count >> registration_duration >> books_per_day;
         instance.libraries.add(library_id, library_book_count, registration_duration, books_per_day);
         auto & library = instance.libraries[library_id];
-        for (unsigned int item; item < library_book_count; ++item)
+        for (unsigned int item{}; item < library_book_count; ++item)
         {
             book_id_t book_id;
             istream >> book_id;

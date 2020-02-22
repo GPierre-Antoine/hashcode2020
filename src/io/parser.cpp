@@ -42,7 +42,6 @@ problem_instance parser::parse(std::istream & istream)
             istream >> book_id;
             library.add(&instance.books[book_id]);
         }
-        library.compute_stats();
     }
 
     istream >> std::ws;

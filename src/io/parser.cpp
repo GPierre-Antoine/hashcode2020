@@ -3,8 +3,19 @@
 //
 
 #include <istream>
+#include <iostream>
 #include "parser.h"
 
+
+void flush(std::istream & istream)
+{
+    std::cerr << "\nExtra info :" << std::endl;
+    std::string container;
+    while (getline(istream, container))
+    {
+        std::cerr << container << "\n";
+    }
+}
 
 problem_instance parser::parse(std::istream & istream)
 {
@@ -39,6 +50,7 @@ problem_instance parser::parse(std::istream & istream)
     auto next = istream.peek();
     if (next != EOF)
     {
+        flush(istream);
         throw std::runtime_error("bad parsing");
     }
 

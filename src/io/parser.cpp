@@ -4,8 +4,17 @@
 
 #include <istream>
 #include <iostream>
+#include <tuple>
 #include "parser.h"
 
+
+template <typename T>
+auto read_type(std::istream & is)
+{
+    T t;
+    is >> t;
+    return t;
+}
 
 void flush(std::istream & istream)
 {
@@ -17,12 +26,31 @@ void flush(std::istream & istream)
     }
 }
 
+std::tuple<unsigned, library_id_t, duration_t> read_first_line(std::istream & is)
+{
+    auto book_count = read_type<unsigned>(is);
+    auto libraries_count = read_type<library_id_t>(is);
+    auto duration = read_type<duration_t>(is);
+    return {book_count, libraries_count, duration};
+}
+
+void parse_library(problem_instance & instance, std::istream & istream, library_id_t library_id)
+{
+    auto library_book_count = read_type<unsigned>(istream);
+    auto registration_duration = read_type<duration_t>(istream);
+    auto books_per_day = read_type<books_per_day_t>(istream);
+    instance.libraries.add(library_id, library_book_count, registration_duration, books_per_day);
+    auto & library = instance.libraries[library_id];
+    for (unsigned int item{}; item < library_book_count; ++item)
+    {
+        auto book_id = read_type<book_id_t>(istream);
+        library.add(&instance.books[book_id]);
+    }
+}
+
 problem_instance parser::parse(std::istream & istream)
 {
-    unsigned int book_count;
-    library_id_t libraries_count;
-    duration_t duration;
-    istream >> book_count >> libraries_count >> duration;
+    auto[book_count, libraries_count, duration] = read_first_line(istream);
 
     problem_instance instance(book_count, libraries_count, duration);
 
@@ -30,18 +58,7 @@ problem_instance parser::parse(std::istream & istream)
 
     for (library_id_t library_id{}; library_id < libraries_count; ++library_id)
     {
-        unsigned int library_book_count;
-        duration_t registration_duration;
-        books_per_day_t books_per_day;
-        istream >> library_book_count >> registration_duration >> books_per_day;
-        instance.libraries.add(library_id, library_book_count, registration_duration, books_per_day);
-        auto & library = instance.libraries[library_id];
-        for (unsigned int item{}; item < library_book_count; ++item)
-        {
-            book_id_t book_id;
-            istream >> book_id;
-            library.add(&instance.books[book_id]);
-        }
+        parse_library(instance, istream, library_id);
     }
 
     istream >> std::ws;
@@ -55,12 +72,11 @@ problem_instance parser::parse(std::istream & istream)
 
     return instance;
 }
+
 void parser::parse_books(std::istream & istream, unsigned int book_count, problem_instance & instance)
 {
     while (book_count--)
     {
-        score_t score;
-        istream >> score;
-        instance.books.add(score);
+        instance.books.add(read_type<score_t>(istream));
     }
 }

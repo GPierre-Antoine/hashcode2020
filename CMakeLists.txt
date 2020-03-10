@@ -19,5 +19,5 @@ add_executable(hashcode
         src/entities/library.cpp src/entities/library.h
         src/problem/heuristic.h
         src/entities/def.h
-        #src/statistics/bookset_statistics.cpp src/statistics/bookset_statistics.h
+        src/statistics/bookset_statistics.cpp src/statistics/bookset_statistics.h
         src/statistics/basic_info.h)

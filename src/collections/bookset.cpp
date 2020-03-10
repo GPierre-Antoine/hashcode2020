@@ -25,22 +25,22 @@ std::size_t bookset::size() const
     return catalog.size();
 }
 
-bookset::const_iterator bookset::cbegin() const noexcept
+auto bookset::cbegin() const noexcept -> decltype(catalog.cbegin())
 {
     return catalog.cbegin();
 }
 
-bookset::const_iterator bookset::cend() const noexcept
+auto bookset::cend() const noexcept -> decltype(catalog.cend())
 {
     return catalog.cend();
 }
 
-bookset::iterator bookset::begin() noexcept
+auto bookset::begin() noexcept -> decltype(catalog.begin())
 {
     return catalog.begin();
 }
 
-bookset::iterator bookset::end() noexcept
+auto bookset::end() noexcept -> decltype(catalog.end())
 {
     return catalog.end();
 }

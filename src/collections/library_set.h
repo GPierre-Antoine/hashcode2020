@@ -20,6 +20,9 @@ public:
             library_id_t id, book_count_t book_count, duration_t registration_duration, books_per_day_t books_per_day
     );
     library & operator[](unsigned int index);
-
+    auto begin() -> decltype(catalog.begin());
+    auto end() -> decltype(catalog.end());
+    [[nodiscard]] auto cbegin() -> decltype(catalog.cbegin());
+    [[nodiscard]] auto cend() -> decltype(catalog.cend());
 };
 

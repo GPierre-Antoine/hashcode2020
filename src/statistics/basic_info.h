@@ -22,20 +22,20 @@ struct basic_info
     double stddev;
 };
 
-template <typename iterator, typename closure>
+template <typename iterator, typename element>
 struct basic_info_calculator
 {
-    basic_info operator()(iterator begin, iterator end, closure lambda);
+    static basic_info extract(iterator begin, iterator end, std::function<std::size_t(element)> lambda) noexcept;
 };
 
-template <typename iterator, typename closure>
-basic_info basic_info_calculator<iterator, closure>::operator()(iterator begin, iterator end, closure lambda)
+template <typename iterator, typename element>
+basic_info basic_info_calculator<iterator, element>::extract(
+        iterator begin, iterator end, std::function<std::size_t(element)> lambda
+) noexcept
 {
-    basic_info info{};
-
-    info.size = std::distance(begin, end);
-    info.sum = std::accumulate(
-            begin, end, 0, [lambda](std::size_t total, const auto & value)
+    auto size = static_cast<std::size_t>(std::distance(begin, end));
+    auto sum = static_cast<std::size_t>(std::accumulate(
+            begin, end, 0, [lambda](std::size_t total, const element & value)
             {
                 std::size_t increment = lambda(value);
                 if (std::numeric_limits<std::size_t>::max() - increment < total)
@@ -45,18 +45,18 @@ basic_info basic_info_calculator<iterator, closure>::operator()(iterator begin, 
                 return total + increment;
 
             }
-    );
-    info.mean = double(info.sum) / info.size;
+    ));
+    auto mean = double(sum) / size;
 
-    double accum = 0.0;
+    auto accum = 0.0;
     std::for_each(
-            begin, end, [&, info](const auto & value)
+            begin, end, [&, mean](const auto & value)
             {
-                accum += std::pow(lambda(value) - info.mean, 2);
+                accum += std::pow(lambda(value) - mean, 2);
             }
     );
 
-    info.stddev = std::sqrt(accum / double(info.size - 1));
+    auto stddev = std::sqrt(accum / double(size - 1));
 
-    return info;
+    return {size, sum, mean, stddev};
 }
